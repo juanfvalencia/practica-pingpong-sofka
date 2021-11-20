@@ -201,3 +201,32 @@
   let scorePlayerR=0;
   document.getElementById("playerLeft").innerHTML = scorePlayerL;
   document.getElementById("playerRight").innerHTML = scorePlayerR;
+
+  let board = new Board(800, 400);
+  let barLeft = new Bar(10, 100, 40, 150, board);
+  let barRight = new Bar(750, 100, 40, 150, board);
+  let canvas = document.getElementById("canvas");
+  let board_view = new BoardView(canvas, board);
+  let ball=new Ball(400,100,10,board);
+  
+  document.addEventListener("keydown", function (ev) {
+    ev.preventDefault();
+    if (ev.key === "ArrowDown") {
+      ev.preventDefault();
+      barRight.down();
+    } else if (ev.key === "ArrowUp") {
+      ev.preventDefault();
+      barRight.up();
+    }
+    if (ev.key === "w") {
+      ev.preventDefault();
+      barLeft.up();
+    } else if (ev.key === "s") {
+      ev.preventDefault();
+      barLeft.down();
+    }
+    if(ev.key===" "){
+      ev.preventDefault();
+      board.playing=!board.playing;
+    }
+  });
