@@ -196,3 +196,8 @@
       }
     }
   })();
+
+  let scorePlayerL=0;
+  let scorePlayerR=0;
+  document.getElementById("playerLeft").innerHTML = scorePlayerL;
+  document.getElementById("playerRight").innerHTML = scorePlayerR;
