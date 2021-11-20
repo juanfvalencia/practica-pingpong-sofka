@@ -168,7 +168,7 @@
       return hit;
     }
   
-    // Implementación de golpe con las barras de los jugadores
+    // Implementación de golpe con las barras de cada jugador
     function hit(a,b) {
         //Validación de colisión
         let hit = false;
@@ -225,20 +225,20 @@
       //Se Añade el EventListener para iedntificar qué tecla se presiona para generar el movimiento en up() y down()
     ev.preventDefault();
     if (ev.key === "ArrowDown") {
-        //Movimiento de la barra del player1 hacia arriba
+        //Movimiento de la barra del player2 hacia arriba
       ev.preventDefault();
       barRight.down();
     } else if (ev.key === "ArrowUp") {
-        //Movimiento de la barra1 del player1 hacia abajo
+        //Movimiento de la barra1 del player2 hacia abajo
       ev.preventDefault();
       barRight.up();
     }
     if (ev.key === "w") {
-        //Movimiento de la barra del player2 hacia arriba
+        //Movimiento de la barra del player1 hacia arriba
       ev.preventDefault();
       barLeft.up();
     } else if (ev.key === "s") {
-        //Movimiento de la barra del player2 hacia abajo
+        //Movimiento de la barra del player1 hacia abajo
       ev.preventDefault();
       barLeft.down();
     }
