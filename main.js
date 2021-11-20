@@ -136,14 +136,14 @@
          if (this.board.ball.x<0) {
           ball=new Ball(400,100,10,this.board);
           this.play();
-          this.board.playing=!this.board.playing;
-          document.getElementById("playerRight").innerHTML=scorePlayerR+1;
+          this.board.playing =! this.board.playing;
+          document.getElementById("playerRight").innerHTML = scorePlayerR+1;
          }
          else if(this.board.ball.x>800){
-          ball=new Ball(400,100,10,this.board);
+          ball = new Ball(400,100,10,this.board);
           this.play();
-          this.board.playing=!this.board.playing;
-          document.getElementById("playerLeft").innerHTML=scorePlayerL+1;
+          this.board.playing =! this.board.playing;
+          document.getElementById("playerLeft").innerHTML = scorePlayerL+1;
          }
       }
     };
@@ -151,11 +151,11 @@
     
     function hitBorder(ball) {
       let hit = false;
-      if(ball.y+ball.radius<=ball.height){
-          hit=true;
+      if(ball.y+ball.radius <= ball.height){
+          hit = true;
       }
       if(ball.y+ball.radius>=400){
-          hit=true;
+          hit = true;
       }
       return hit;
     }
@@ -164,19 +164,19 @@
     function hit(a,b) {
         let hit = false;
   
-        if(b.x+b.width >=a.x && b.x<a.x+a.width){
+        if(b.x+b.width >= a.x && b.x<a.x+a.width){
             if(b.y + b.height>=a.y && b.y <a.y+a.height ){
-                hit=true;
+                hit = true;
             }
         }
-        if(b.x <= a.x && b.x +b.width>=a.x +a.width){
+        if(b.x <= a.x && b.x +b.width >= a.x +a.width){
             if(b.y<=a.y && b.y+b.height>=a.y+a.height){
-                  hit=true;
+                  hit = true;
             }
         }
-        if(a.x<=b.x && a.x +a.width>=b.x +b.width){
-            if(a.y<=b.y && a.y + a.height >= b.y +b.height){
-                hit=true;
+        if(a.x <= b.x && a.x +a.width >= b.x +b.width){
+            if(a.y <= b.y && a.y + a.height >= b.y +b.height){
+                hit = true;
             }
         }
         return hit;
