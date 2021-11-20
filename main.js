@@ -67,3 +67,26 @@
     }
 
 })();
+
+(function barrascolision() {
+    self.Bar = function (x, y, width, height, board) {
+      this.x = x;
+      this.y = y;
+      this.width = width;
+      this.height = height;
+      this.board = board;
+      this.board.bars.push(this);
+      this.kind = "rectangle";
+      this.speed = 10;
+    };
+    self.Bar.prototype = {
+      down: function () {
+          if(this.y !== 250)
+              this.y += this.speed;
+      },
+      up: function () {
+          if(this.y !== 0)
+            this.y -= this.speed;
+      }
+    };
+  })();
