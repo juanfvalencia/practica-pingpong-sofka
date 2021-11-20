@@ -1,3 +1,4 @@
+//Implementación de la función tablero
 (function tablero() {
     self.Board = function (width, height) {
       this.width = width;
@@ -18,7 +19,7 @@
       },
     };
   })();
-
+  //Implementación de la función Pelota
   (function pelota() {
     self.Ball=function(x,y,radius,board) {
         this.x = x;
@@ -35,6 +36,7 @@
         this.max_bounce_angle=Math.PI/12;
     }
     self.Ball.prototype={
+        //Genera el movimiento de la pelota
         move: function(){
             this.x+=(this.speed_x * this.direccion );
             this.y+=(this.speed_y);
@@ -49,6 +51,7 @@
             if(this.x>(this.board.width/2)) this.direccion=-1;
             else this.direccion=1;
         },
+        //Reacciona a la colisión con una barra
         collisionBorder: function () {
             if(this.y<=100){
             this.speed_y = this.speed*Math.sin(this.bounce_angle)
@@ -67,7 +70,7 @@
     }
 
 })();
-
+// Implementación de la función barracolision
 (function barrascolision() {
     self.Bar = function (x, y, width, height, board) {
       this.x = x;
@@ -80,17 +83,19 @@
       this.speed = 10;
     };
     self.Bar.prototype = {
+        //Movimiento de la barra hacia abajo
       down: function () {
           if(this.y !== 250)
               this.y += this.speed;
       },
+        //Movimiento de la barra hacia abajo
       up: function () {
           if(this.y !== 0)
             this.y -= this.speed;
       }
     };
   })();
-
+  //Implementación de la función vistatablero
   (function vistatablero() {
     BoardView = function (canvas, board) {
       this.canvas = canvas;
@@ -101,6 +106,7 @@
     };
   
     self.BoardView.prototype = {
+        //Limpia la pantalla
       clean: function () {
         this.ctx.clearRect(0, 0, this.board.width, this.board.height);
       },
@@ -110,6 +116,7 @@
           draw(this.ctx, el);
         }
       },
+      //Recibe las funciones para poner el juego en funcionamiento
       play: function () {
           if(this.board.playing){
           this.clean();
@@ -119,6 +126,7 @@
           this.check_goal();
           }
       },
+      //Valida dónde se está generando la colisión 
       check_collisions: function () {
           for (let i = this.board.bars.length - 1; i >= 0; i--) {
               let bar = this.board.bars[i];
@@ -131,7 +139,7 @@
               
             }
       },
-      
+      //Función para el retorno de la puntuación de cada jugador
       check_goal: function puntos() {
          if (this.board.ball.x<0) {
           ball=new Ball(400,100,10,this.board);
@@ -148,7 +156,7 @@
       }
     };
   
-    
+    //Función para validación de golpe en el borde superior e inferior
     function hitBorder(ball) {
       let hit = false;
       if(ball.y+ball.radius <= ball.height){
@@ -160,21 +168,25 @@
       return hit;
     }
   
-    
+    // Implementación de golpe con las barras de los jugadores
     function hit(a,b) {
+        //Validación de colisión
         let hit = false;
-  
-        if(b.x+b.width >= a.x && b.x<a.x+a.width){
+        //Valida si a colisiona con b
+        if(b.x + b.width >= a.x && b.x < a.x + a.width){
+            //Validación de colisiones verticales
             if(b.y + b.height>=a.y && b.y <a.y+a.height ){
                 hit = true;
             }
         }
+        //Valida si a colisiona con b
         if(b.x <= a.x && b.x +b.width >= a.x +a.width){
-            if(b.y<=a.y && b.y+b.height>=a.y+a.height){
+            if(b.y <= a.y && b.y + b.height >= a.y + a.height){
                   hit = true;
             }
         }
-        if(a.x <= b.x && a.x +a.width >= b.x +b.width){
+        //Valida si b colisiona con a
+        if(a.x <= b.x && a.x + a.width >= b.x + b.width){
             if(a.y <= b.y && a.y + a.height >= b.y +b.height){
                 hit = true;
             }
@@ -210,23 +222,29 @@
   let ball=new Ball(400,100,10,board);
   
   document.addEventListener("keydown", function (ev) {
+      //Se Añade el EventListener para iedntificar qué tecla se presiona para generar el movimiento en up() y down()
     ev.preventDefault();
     if (ev.key === "ArrowDown") {
+        //Movimiento de la barra del player1 hacia arriba
       ev.preventDefault();
       barRight.down();
     } else if (ev.key === "ArrowUp") {
+        //Movimiento de la barra1 del player1 hacia abajo
       ev.preventDefault();
       barRight.up();
     }
     if (ev.key === "w") {
+        //Movimiento de la barra del player2 hacia arriba
       ev.preventDefault();
       barLeft.up();
     } else if (ev.key === "s") {
+        //Movimiento de la barra del player2 hacia abajo
       ev.preventDefault();
       barLeft.down();
     }
     if(ev.key===" "){
       ev.preventDefault();
+       //Barra espaciadora
       board.playing=!board.playing;
     }
   });
@@ -235,6 +253,7 @@
   window.requestAnimationFrame(controller);
   
   function controller() {
+      //Se implementa llamado de la función play(), y control del juego para que se ejecute cada vez que hay un movimiento
       board_view.play();
     window.requestAnimationFrame(controller);
   }
