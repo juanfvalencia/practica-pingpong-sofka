@@ -91,7 +91,7 @@
     };
   })();
 
-  (function tablerovista() {
+  (function vistatablero() {
     BoardView = function (canvas, board) {
       this.canvas = canvas;
       this.canvas.width = board.width;
